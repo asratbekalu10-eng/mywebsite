@@ -250,13 +250,13 @@ header {
     transform: translateY(0);
 }
 
-.contact {
+.products{
     padding: 4rem 2rem;
     background: #fff;
     text-align: center;
 }
 
-.contact h2 {
+.products h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
