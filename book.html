@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeni Decor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="cropped_circle_image.png" type="image/x-icon">
+    <style>
+    body {
+      background: linear-gradient(rgba(34,37,38,0.65), rgba(34,37,38,0.65)),
+                  url('IMG_20250716_233726_548.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Montserrat', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .booking-container {
+      background: rgba(44, 62, 80, 0.93);
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(33,150,243,0.13);
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      margin: 2rem;
+      animation: fadeInUp 1.1s cubic-bezier(0.23, 1, 0.32, 1);
+      backdrop-filter: blur(8px) saturate(120%);
+      border: 1.5px solid rgba(0,188,212,0.13);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px) scale(0.98);}
+      100% { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .progress-step {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #232526;
+      color: #bdbdbd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 2.5px solid #bdbdbd;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      z-index: 2;
+      position: relative;
+    }
+    .progress-step.active, .progress-step.completed {
+      background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+      color: #fff;
+      border-color: #00bcd4;
+    }
+    .progress-step.completed {
+      color: transparent !important; /* Hide the number */
+      position: relative;
+    }
+    .progress-step.completed::after {
+      /* The checkmark SVG remains visible */
+      z-index: 2;
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 18px; height: 18px;
+      background: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9.5L8 13.5L14 6.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
+      background-size: 18px 18px;
+      transform: translate(-50%,-50%);
+    }
+    .progress-bar-line {
+      flex: 1;
+      height: 3px;
+      background: #bdbdbd;
+      margin: 0 6px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-bar-line.active {
+      background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+      transition: background 0.4s;
+    }
+    h1 {
+      color: #00bcd4;
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 1.6rem;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(33,150,243,0.10);
+    }
+    .decor-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-bottom: 2.2rem;
+      z-index: 1;
+      position: relative;
+    }
+    .decor-options label {
+      background: rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.05rem;
+      color: #e0e0e0;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(33,150,243,0.07);
+      transition: background 0.2s, color 0.2s, transform 0.13s, box-shadow 0.13s;
+      border: 2px solid transparent;
+    }
+    .decor-options label:hover,
+    .decor-options input[type="radio"]:focus + label {
+      background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+      color: #fff;
+      transform: scale(1.03);
+      border-color: #00bcd4;
+    }
+    .decor-options input[type="radio"] {
+      accent-color: #00bcd4;
+      width: 1.1em;
+      height: 1.1em;
+      margin-right: 0.7em;
+      cursor: pointer;
+      transition: accent-color 0.2s;
+    }
+    .btn2 {
+      width: 100%;
+      padding: 0.9rem 0;
+      font-size: 1.08rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(33,150,243,0.13);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn2:hover {
+      background: linear-gradient(90deg, #2196f3 0%, #00bcd4 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 24px rgba(33,150,243,0.18);
+    }
+    /* Step 2 styles */
+    .step2 {
+      display: none;
+      animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .step2.active {
+      display: block;
+    }
+    .step2 label {
+      display: block;
+      color: #e0e0e0;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      text-align: left;
+    }
+    .step2 input, .step2 textarea {
+      width: 95%;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1.5px solid #00bcd4;
+      background: rgba(255,255,255,0.09);
+      color: #222;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .step2 input:focus, .step2 textarea:focus {
+      border-color: #2196f3;
+    }
+    .step2 .btn2 {
+      margin-top: 0.2rem;
+    }
+    .step2 .summary {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      color: #00bcd4;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 1.08rem;
+    }
+    /* Thank you */
+    .thankyou {
+      display: none;
+      animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      text-align: center;
+      padding: 2rem 0 1rem 0;
+    }
+    .thankyou.active {
+      display: block;
+    }
+    .thankyou .icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.1rem auto;
+      display: block;
+    }
+    .thankyou-text {
+      font-size: 1.22rem;
+      color: #00bcd4;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(33,150,243,0.10);
+    }
+    .thankyou-sub {
+      color: #e0e0e0;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+    .back-arrow {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      background: none;
+      border: none;
+      padding: 0.2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.15s;
+    }
+    .back-arrow:hover {
+      transform: scale(1.15);
+      background: rgba(0,188,212,0.08);
+      border-radius: 50%;
+    }
+    @media (max-width: 600px) {
+      .booking-container {
+        padding: 1.2rem 0.5rem;
+        max-width: 98vw;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      .decor-options label {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.7rem;
+      }
+      .back-arrow {
+        top: 0.5rem;
+        left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-container">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-step active" data-step="1">1</div>
+      <div class="progress-bar-line" id="bar1"></div>
+      <div class="progress-step" data-step="2">2</div>
+      <div class="progress-bar-line" id="bar2"></div>
+      <div class="progress-step" data-step="3">3</div>
+      <div class="progress-bar-line" id="bar3"></div>
+      <div class="progress-step" data-step="4">4</div>
+    </div>
+    <!-- Step 1: Decor selection -->
+    <form id="step1">
+      <h1>Choose Your Decor Style</h1>
+      <div class="decor-options">
+        <label>
+          <input type="radio" name="decor" value="Birthday" required>
+          Birthday Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Wedding">
+          Wedding Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Corporate">
+          Corporate Event Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Baby Shower">
+          Baby Shower Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Graduation">
+          Graduation Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Anniversary">
+          Anniversary Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Themed Party">
+          Themed Party Decor
+        </label>
+        <label>
+          <input type="radio" name="decor" value="Other">
+          Other (please specify in the 3 step )
+        </label>
+      </div>
+      <button type="submit" class="btn2">Continue</button>
+    </form>
+    <!-- Step 2: Details -->
+    <form id="step2" class="step2">
+      <button type="button" class="back-arrow" id="backToStep1" aria-label="Back to Step 1">
+        <!-- SVG left arrow icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M15 19l-7-7 7-7" stroke="#00bcd4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <h1>Select Your Event Date & Time</h1>
+      <label for="eventDate">Event Date</label>
+      <input type="date" id="eventDate" name="Event Date" required>
+      <label for="eventTime">Event Time</label>
+      <input type="time" id="eventTime" name="Event Time" required>
+      <button type="submit" class="btn2">Continue</button>
+    </form>
+    <!-- Step 3: Tell Us About Your Event -->
+    <form action="https://formspree.io/f/xwpqnbyd" id="step3" class="step2" method="post">
+      <button type="button" class="back-arrow" id="backToStep2" aria-label="Back to Step 2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M15 19l-7-7 7-7" stroke="#00bcd4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <h1>Tell Us About Your Event</h1>
+      <div class="summary" id="decorSummary"></div>
+      <input type="hidden" id="decorStyle" name="Decor Style" value="">
+      <input type="hidden" id="eventDateHidden" name="Event Date" value="">
+      <input type="hidden" id="eventTimeHidden" name="Event Time" value="">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email">
+      <label for="details">Event Details / Custom Requests</label>
+      <textarea id="details" name="details" rows="3" placeholder="Tell us more about your event or decor needs"></textarea>
+      <button type="submit" class="btn2">Submit Booking</button>
+    </form>
+    <!-- Step 4: Thank You -->
+    <div id="thankyou" class="thankyou">
+      <svg class="icon" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="30" fill="none" stroke="#00bcd4" stroke-width="5" opacity="0.3"/>
+        <path d="M22 38 L32 48 L50 28" stroke="#2196f3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="thankyou-text">Thank you for your booking!</div>
+      <div class="thankyou-sub">We’ll contact you soon.<br>Have a wonderful day.</div>
+    </div>
+  </div>
+  <script>
+  function setProgress(step) {
+    const steps = document.querySelectorAll('.progress-step');
+    const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
+    steps.forEach((el, idx) => {
+      el.classList.remove('active', 'completed');
+      if (idx + 1 < step) el.classList.add('completed');
+      else if (idx + 1 === step) el.classList.add('active');
+    });
+    bars.forEach((bar, idx) => {
+      bar.classList.toggle('active', step > idx + 1);
+    });
+  }
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+  const thankyou = document.getElementById('thankyou');
+  const decorSummary = document.getElementById('decorSummary');
+  step1.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const decor = step1.querySelector('input[name="decor"]:checked');
+    if (decor) {
+      decorSummary.textContent = `You selected: ${decor.value}`;
+      document.getElementById('decorStyle').value = decor.value;
+    }
+    step1.style.display = 'none';
+    step2.classList.add('active');
+    setProgress(2);
+  });
+  step2.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const date = document.getElementById('eventDate').value;
+    const time = document.getElementById('eventTime').value;
+    document.getElementById('eventDateHidden').value = date;
+    document.getElementById('eventTimeHidden').value = time;
+    step2.classList.remove('active');
+    step3.classList.add('active');
+    setProgress(3);
+  });
+  step3.addEventListener('submit', function(e) {
+    e.preventDefault();
+    step3.classList.remove('active');
+    thankyou.classList.add('active');
+    setProgress(4);
+    // Optionally submit the form via AJAX here if you want to stay on the page
+    step3.submit();
+    // Redirect to home after 2 seconds
+    setTimeout(function() {
+      window.location.href = "index.html";
+    }, 1000);
+  });
+
+  document.getElementById('backToStep1').onclick = function() {
+  step2.classList.remove('active');
+  step1.style.display = 'block';
+  setProgress(1);
+};
+document.getElementById('backToStep2').onclick = function() {
+  step3.classList.remove('active');
+  step2.classList.add('active');
+
+};
+  </script>
+</body>
+</html>
