@@ -675,8 +675,8 @@ footer {
     padding: 0.8rem 2rem;
     border: none;
     border-radius: 0px;      /* Changed from 30px to 10px */
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.1rem;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     transition: background 0.2s, color 0.2s, transform 0.2s;
@@ -699,7 +699,7 @@ footer {
     }
     50% {
         transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(33,150,243,0.25);
+        box-shadow: 0 2px 20px rgba(33,150,243,0.25);
     }
     100% {
         transform: scale(1);
@@ -709,9 +709,9 @@ footer {
 
 
 .back-to-top {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
+    position: fixed !important;
+    right: 24px !important;
+    bottom: 24px !important;
     background: #00bcd4;
     color: #fff;
     border: none;
@@ -733,16 +733,6 @@ footer {
     transform: translateY(-4px) scale(1.08);
 }
 
-@media (max-width: 700px) {
-    .footer-newsletter input[type="email"] {
-        min-width: 120px;
-        font-size: 0.95rem;
-    }
-    .footer-newsletter button {
-        font-size: 1rem;
-        padding: 0.7rem 0.8rem;
-    }
-}
 
 .our-works {
     padding: 4rem 2rem;
